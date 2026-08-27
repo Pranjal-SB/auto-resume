@@ -64,7 +64,7 @@ private repos, so they render fine for you and 404 for everyone else. Point
 ```yaml
 - name: ExamDB
   repo: examdb
-  url: https://examdb.org   # repo is private
+  url: https://examdb.org
 ```
 
 **Wrap metrics in quotes to bold them.** `"194" exams` renders as **194**

@@ -8,7 +8,7 @@
 name: Pranjal Swarup Bhatnagar
 location: Chennai, Tamil Nadu, India
 email: psbhatnagar.in@gmail.com
-phone: "" # TODO: add or leave empty to omit the line
+phone: "+91 99710 79975"
 
 links:
   linkedin: linkedin.com/in/pranjalsb
@@ -50,7 +50,7 @@ projects:
     repo: type
     url: https://github.com/Pranjal-SB/type
     stack: Rust, ratatui, LSP, DAP, tree-sitter
-    show_stars: true
+    show_stars: false
     bullets:
       - Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently "v0.2.10".
       - Wrote LSP, DAP and tree-sitter clients so new language support arrives by protocol instead of per-language code. Holds a "100ms" cold-start and "16ms" p99 keystroke-to-glyph budget.
@@ -61,10 +61,10 @@ projects:
     repo: OutN
     url: https://github.com/Pranjal-SB/OutN
     stack: Python, discord.py, OpenCV
-    show_stars: true
+    show_stars: false
     bullets:
       - Self-hostable FOSS Pokemon recognition and assistant bot for Discord, identifying spawns from images and solving hints automatically; config-driven so users deploy it without writing code.
-      - Maintained across "2+ years" to "v9.1" through repeated upstream API changes, drawing "7 stars" and "4 forks" from self-hosters.
+      - Maintained across "2+ years" and "9 major versions" through repeated breaking changes to the upstream Discord and Poketwo APIs, keeping existing self-hosted deployments working without manual migration.
 
 # ---------------------------------------------------------------------------
 # EDUCATION

@@ -212,6 +212,30 @@ func TestMergeLinkedinKeepsNonInternTitles(t *testing.T) {
 	}
 }
 
+// An empty contact field must not leave a dangling "\\" separator.
+func TestContactOmitsEmptyFields(t *testing.T) {
+	cfg := &Config{Email: "a@b.c"}
+	cfg.Links.GitHub = "github.com/x"
+
+	got := renderContact(cfg)
+	if strings.Contains(got, "tel:") {
+		t.Errorf("empty phone still rendered a tel link: %q", got)
+	}
+	if n := strings.Count(got, `\\`); n != 1 {
+		t.Errorf("want 1 separator between 2 fields, got %d in %q", n, got)
+	}
+
+	cfg.Phone = "+91 99710 79975"
+	withPhone := renderContact(cfg)
+	// The dial target must be digits only; the visible label keeps spacing.
+	if !strings.Contains(withPhone, `\href{tel:+919971079975}`) {
+		t.Errorf("tel: target should strip spaces, got %q", withPhone)
+	}
+	if !strings.Contains(withPhone, "+91 99710 79975") {
+		t.Errorf("visible label should keep spacing, got %q", withPhone)
+	}
+}
+
 func TestMergeLinkedinNilIsSafe(t *testing.T) {
 	cfg := &Config{}
 	if added := MergeLinkedin(cfg, nil); added != nil {

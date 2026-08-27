@@ -66,7 +66,9 @@
 \def \printaddress #1{
   \begingroup
     \def \\ {\addressSep\ }
-    \centerline{#1}
+    % \centerline is an \hbox to \hsize and cannot break, so a contact line
+    % with enough entries overflows the margin instead of wrapping.
+    {\centering #1\par}
   \endgroup
   \par
   \addressskip

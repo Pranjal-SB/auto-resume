@@ -196,6 +196,31 @@ func renderSkills(cfg *Config) string {
 	return strings.Join(rows, `\\`+"\n")
 }
 
+// renderContact joins only the contact fields that are filled. Building the
+// line in the template instead would leave a dangling "\\" separator for
+// every field left blank.
+func renderContact(cfg *Config) string {
+	var parts []string
+
+	if cfg.Email != "" {
+		parts = append(parts, fmt.Sprintf(`\href{mailto:%s}{%s}`, cfg.Email, cleanData(cfg.Email)))
+	}
+	if cfg.Phone != "" {
+		// tel: wants no spaces; the visible label keeps them.
+		tel := strings.NewReplacer(" ", "", "-", "", "(", "", ")", "").Replace(cfg.Phone)
+		parts = append(parts, fmt.Sprintf(`\href{tel:%s}{%s}`, tel, cleanData(cfg.Phone)))
+	}
+	for _, l := range []string{cfg.Links.LinkedIn, cfg.Links.GitHub, cfg.Links.Site} {
+		if l == "" {
+			continue
+		}
+		bare := strings.TrimPrefix(strings.TrimPrefix(l, "https://"), "http://")
+		parts = append(parts, fmt.Sprintf(`\href{https://%s}{%s}`, bare, cleanData(bare)))
+	}
+
+	return strings.Join(parts, ` \\ `)
+}
+
 // githubLanguages is the one genuinely live field: every language across
 // every repo the token can see, deduped.
 func githubLanguages(gh *models.GithubResponse) string {
@@ -227,11 +252,7 @@ func Render(templateFile, outputFile string, cfg *Config, gh *models.GithubRespo
 	repl := map[string]string{
 		"<NAME>":           cleanData(cfg.Name),
 		"<LOCATION>":       cleanData(cfg.Location),
-		"<EMAIL>":          cfg.Email,
-		"<PHONE>":          cfg.Phone,
-		"<LINKEDIN>":       cfg.Links.LinkedIn,
-		"<GITHUB>":         cfg.Links.GitHub,
-		"<URL>":            cfg.Links.Site,
+		"<CONTACT>":        renderContact(cfg),
 		"<EXPERIENCES>":    renderExperience(cfg),
 		"<REPOSITORIES>":   renderProjects(cfg, idx),
 		"<EDUCATION>":      renderEducation(cfg),
