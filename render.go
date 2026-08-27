@@ -93,6 +93,14 @@ func itemize(bullets []string) []string {
 	return append(out, `\end{itemize}`)
 }
 
+// humanCount renders 1690 as "1.7k" so a big star count reads at a glance.
+func humanCount(n int) string {
+	if n < 1000 {
+		return fmt.Sprintf("%d", n)
+	}
+	return strings.TrimSuffix(fmt.Sprintf("%.1f", float64(n)/1000), ".0") + "k"
+}
+
 // repoStats indexes the live GitHub data by repo name so YAML entries can
 // pull star counts without a second API call.
 type repoStats struct {
@@ -111,10 +119,21 @@ func indexRepos(gh *models.GithubResponse) map[string]repoStats {
 	return idx
 }
 
-func renderProjects(cfg *Config, idx map[string]repoStats) string {
+// renderContributions renders external-repo contributions. It wraps the whole
+// PROJECTS section in the placeholder so an empty contributions list drops the
+// section header too, instead of leaving a bare "OPEN SOURCE" heading.
+func renderContributions(items []Project, idx map[string]repoStats) string {
+	body := renderProjects(items, idx)
+	if body == "" {
+		return ""
+	}
+	return "\\begin{rSection}{OPEN SOURCE}\n" + body + "\n\\end{rSection}"
+}
+
+func renderProjects(items []Project, idx map[string]repoStats) string {
 	var entries []string
 
-	for _, p := range cfg.Projects {
+	for _, p := range items {
 		stats, found := idx[strings.ToLower(p.Repo)]
 
 		// An explicit url always wins. Falling back to the GitHub url is
@@ -129,7 +148,7 @@ func renderProjects(cfg *Config, idx map[string]repoStats) string {
 			heading += fmt.Sprintf(` \(\mid\) \textbf{%s}`, cleanData(p.Stack))
 		}
 		if p.ShowStars && found && stats.stars > 0 {
-			heading += fmt.Sprintf(` \(\mid\) \textbf{%d\(\star\)}`, stats.stars)
+			heading += fmt.Sprintf(` \(\mid\) \textbf{%s\(\star\)}`, humanCount(stats.stars))
 		}
 
 		entry := append([]string{heading}, itemize(p.Bullets)...)
@@ -254,7 +273,8 @@ func Render(templateFile, outputFile string, cfg *Config, gh *models.GithubRespo
 		"<LOCATION>":       cleanData(cfg.Location),
 		"<CONTACT>":        renderContact(cfg),
 		"<EXPERIENCES>":    renderExperience(cfg),
-		"<REPOSITORIES>":   renderProjects(cfg, idx),
+		"<REPOSITORIES>":   renderProjects(cfg.Projects, idx),
+		"<CONTRIBUTIONS>":  renderContributions(cfg.Contributions, idx),
 		"<EDUCATION>":      renderEducation(cfg),
 		"<SKILLS>":         renderSkills(cfg),
 		"<CERTIFICATIONS>": cleanData(strings.Join(cfg.Certifications, ", ")),

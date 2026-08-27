@@ -23,9 +23,10 @@ type Config struct {
 		Site     string `yaml:"site"`
 	} `yaml:"links"`
 
-	Education  []Education `yaml:"education"`
-	Experience []Job       `yaml:"experience"`
-	Projects   []Project   `yaml:"projects"`
+	Education     []Education `yaml:"education"`
+	Experience    []Job       `yaml:"experience"`
+	Projects      []Project   `yaml:"projects"`
+	Contributions []Project   `yaml:"contributions"`
 
 	// Skills renders as a two-column table; Order fixes the row sequence
 	// because Go map iteration is randomised.
@@ -98,12 +99,17 @@ func (c *Config) validate() error {
 	if c.Email == "" {
 		return errors.DataParsingError{Message: "config: email is required (GitHub profile email is often private and renders blank)"}
 	}
-	for i, p := range c.Projects {
-		if p.Name == "" {
-			return errors.DataParsingError{Message: fmt.Sprintf("config: projects[%d] has no name", i)}
-		}
-		if p.URL == "" && p.Repo == "" {
-			return errors.DataParsingError{Message: fmt.Sprintf("config: project %q needs a url or a repo", p.Name)}
+	for _, group := range []struct {
+		label string
+		items []Project
+	}{{"projects", c.Projects}, {"contributions", c.Contributions}} {
+		for i, p := range group.items {
+			if p.Name == "" {
+				return errors.DataParsingError{Message: fmt.Sprintf("config: %s[%d] has no name", group.label, i)}
+			}
+			if p.URL == "" && p.Repo == "" {
+				return errors.DataParsingError{Message: fmt.Sprintf("config: %s %q needs a url or a repo", group.label, p.Name)}
+			}
 		}
 	}
 	for _, k := range c.SkillsOrder {

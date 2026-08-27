@@ -63,7 +63,7 @@ func TestExplicitURLBeatsGithubURL(t *testing.T) {
 		"type":   {url: "https://github.com/Pranjal-SB/type", stars: 1},
 	}
 
-	got := renderProjects(cfg, idx)
+	got := renderProjects(cfg.Projects, idx)
 	if strings.Contains(got, "github.com/Pranjal-SB/examdb") {
 		t.Error("private repo linked to github.com; explicit url was ignored")
 	}
@@ -79,25 +79,45 @@ func TestExplicitURLBeatsGithubURL(t *testing.T) {
 func TestStarsOnlyWhenAskedAndNonZero(t *testing.T) {
 	idx := map[string]repoStats{"a": {stars: 7}, "b": {stars: 0}}
 
-	withStars := renderProjects(&Config{Projects: []Project{
+	withStars := renderProjects([]Project{
 		{Name: "A", Repo: "a", URL: "u", ShowStars: true},
-	}}, idx)
+	}, idx)
 	if !strings.Contains(withStars, `7\(\star\)`) {
 		t.Errorf("expected star count, got %q", withStars)
 	}
 
-	zero := renderProjects(&Config{Projects: []Project{
+	zero := renderProjects([]Project{
 		{Name: "B", Repo: "b", URL: "u", ShowStars: true},
-	}}, idx)
+	}, idx)
 	if strings.Contains(zero, `\star`) {
 		t.Error("rendered a 0-star badge")
 	}
 
-	off := renderProjects(&Config{Projects: []Project{
+	off := renderProjects([]Project{
 		{Name: "A", Repo: "a", URL: "u", ShowStars: false},
-	}}, idx)
+	}, idx)
 	if strings.Contains(off, `\star`) {
 		t.Error("rendered stars with show_stars false")
+	}
+}
+
+func TestHumanCount(t *testing.T) {
+	for n, want := range map[int]string{999: "999", 1000: "1k", 1690: "1.7k", 11088: "11.1k"} {
+		if got := humanCount(n); got != want {
+			t.Errorf("humanCount(%d) = %q, want %q", n, got, want)
+		}
+	}
+}
+
+// Empty contributions must drop the whole OPEN SOURCE header, not leave a
+// bare heading over nothing.
+func TestContributionsDropHeaderWhenEmpty(t *testing.T) {
+	if got := renderContributions(nil, nil); got != "" {
+		t.Errorf("empty contributions should render nothing, got %q", got)
+	}
+	got := renderContributions([]Project{{Name: "X", URL: "u"}}, nil)
+	if !strings.Contains(got, "OPEN SOURCE") {
+		t.Errorf("non-empty contributions should carry the section header, got %q", got)
 	}
 }
 

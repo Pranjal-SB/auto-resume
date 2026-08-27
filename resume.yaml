@@ -19,14 +19,14 @@ links:
 # EXPERIENCE
 # ---------------------------------------------------------------------------
 experience:
-  - title: Associate
-    company: Next Tech Lab
-    location: Chennai, India
+  - title: Associate, Norman Lab
+    company: Next Tech Lab (QS Reimagine Education Award winner)
+    location: SRMIST, Kattankulathur
     start: Apr 2026
     end: Present
-    # TODO: what did you actually do here? 2-3 bullets.
-    # Renders as title + dates with no bullets until you fill this in.
-    bullets: []
+    bullets:
+      - Selected by interview into Norman Lab at Next Tech Lab, the first student-led organisation from India to win the QS Reimagine Education Award.
+      - Built StupidHacks, the portal for the lab's internal hackathon, with a small team. Owned the data layer and its rule tests, the design system on the lab's brand, and the move to Supabase with one-time-code roster sign-in. Live at stupidhack.nexttechlab.in.
 
 # ---------------------------------------------------------------------------
 # PROJECTS
@@ -98,3 +98,27 @@ skills:
 
 certifications: []
 languages: []
+
+# ---------------------------------------------------------------------------
+# OPEN SOURCE — merged PRs to other people's repos. show_stars: true here
+# because a big external star count is the whole point of the section.
+# ---------------------------------------------------------------------------
+contributions:
+  - name: onthespot
+    repo: "" # not under your account, so stars come from the url'd repo below
+    url: https://github.com/ots-downloader/onthespot
+    stack: Python, "1.7k stars"
+    bullets:
+      - Fixed Bandcamp search in a multi-service GUI music downloader by moving it onto the public search API, plus an AppImage runtime-resolution fix. Three PRs merged.
+
+  - name: ClassPro
+    url: https://github.com/suduolabs/ClassPro
+    stack: TypeScript, Next.js, Docker
+    bullets:
+      - Made the Docker build work from a clean clone and pinned the lockfile in this SRM academic-management app ("95 stars"); fixed date-derived planner logic and a shipped-DevMode leak in its Go scraper.
+
+  - name: is-a-dev/register
+    url: https://github.com/is-a-dev/register
+    stack: Community DNS registry, "11k stars"
+    bullets:
+      - Contributor to the is-a.dev subdomain registry, one of the larger community DNS projects on GitHub.
