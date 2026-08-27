@@ -1,0 +1,10 @@
+.env
+github_data.json
+linkedin_data.json
+
+# LaTeX build artifacts (resume.pdf is committed by CI)
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk

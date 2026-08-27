@@ -1,0 +1,131 @@
+\documentclass{resume} % Use the custom resume.cls style
+
+\usepackage[left=0.4 in,top=0.4in,right=0.4 in,bottom=0.4in]{geometry} % Document margins
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} 
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\name{Pranjal Swarup Bhatnagar}
+\address{\href{mailto:psbhatnagar.in@gmail.com}{psbhatnagar.in@gmail.com} \\ \href{https://linkedin.com/in/pranjalsb}{linkedin.com/in/pranjalsb} \\ \href{https://github.com/Pranjal-SB}{github.com/Pranjal-SB} \\ \href{https://psbhatnagar.in}{psbhatnagar.in}}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	SUMMARY
+%----------------------------------------------------------------------------------------
+
+% \begin{rSection}{SUMMARY}
+
+% (summary section unused)
+
+% \end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{EXPERIENCE}
+    \textbf{Associate} \hfill Apr 2026 - Present\\
+Next Tech Lab \hfill \textit{Chennai, India}
+\end{rSection}
+
+% \vspace{1.5em}
+
+%----------------------------------------------------------------------------------------
+%	PROJECTS
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{PROJECTS}    
+    \textbf{\href{https://examdb.org}{ExamDB}} \(\mid\) \textbf{Python, FastAPI, PostgreSQL, Next.js, Docker}
+\begin{itemize}
+\itemsep -3pt{}
+\item Built and shipped a searchable database of \textbf{194} Indian competitive exams, consolidating dates scattered across dozens of government portals into one source that cites the official page behind every date.
+\item Designed a scrape/normalise/dedup/reduce pipeline that preserves conflicting sources and flags the disagreement instead of silently picking a winner, so wrong data stays traceable to the scraper that produced it.
+\item Caught a scraper that passed its own tests while emitting \textbf{46} rows of a historical archive stamped with the current year, spotted from an impossible 29 FEB entry. Added source-diff validation so a row count is never mistaken for correctness.
+\item Built OAuth sign-in storing only SHA-256 digests of opaque session tokens, plus daily scrapers on GitHub Actions and a Next.js frontend. Solo project, live at examdb.org.
+\end{itemize}
+
+\textbf{\href{https://github.com/Pranjal-SB/type}{TYPE}} \(\mid\) \textbf{Rust, ratatui, LSP, DAP, tree-sitter} \(\mid\) \textbf{1\(\star\)}
+\begin{itemize}
+\itemsep -3pt{}
+\item Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently \textbf{v0.2.10}.
+\item Wrote LSP, DAP and tree-sitter clients so new language support arrives by protocol instead of per-language code. Holds a \textbf{100ms} cold-start and \textbf{16ms} p99 keystroke-to-glyph budget.
+\item Added an opt-in vim layer that maps modes and operators onto the same named actions the non-modal path already calls, so it owns no editing primitives and the core never depends on it.
+\item Made themes a TOML artifact rather than a compile-time constant, detecting terminal colour depth at startup and degrading the palette to 256 colours where required.
+\end{itemize}
+
+\textbf{\href{https://github.com/Pranjal-SB/OutN}{OutN}} \(\mid\) \textbf{Python, discord.py, OpenCV} \(\mid\) \textbf{7\(\star\)}
+\begin{itemize}
+\itemsep -3pt{}
+\item Self-hostable FOSS Pokemon recognition and assistant bot for Discord, identifying spawns from images and solving hints automatically; config-driven so users deploy it without writing code.
+\item Maintained across \textbf{2+ years} to \textbf{v9.1} through repeated upstream API changes, drawing \textbf{7 stars} and \textbf{4 forks} from self-hosters.
+\end{itemize}
+\end{rSection}
+% \vspace{1.5em}
+
+%----------------------------------------------------------------------------------------
+%	LANGUAGES
+%----------------------------------------------------------------------------------------
+
+% \begin{rSection}{LANGUAGES}
+
+% \begin{itemize}
+%     
+% \end{itemize}
+
+% \end{rSection}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	CERTIFICATIONS
+%----------------------------------------------------------------------------------------
+
+% \begin{rSection}{CERTIFICATIONS}
+
+%     \begin{itemize}
+%         
+%     \end{itemize}
+
+%     \end{rSection}
+
+
+%     \vspace{1.5em}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+% \vspace{1.5em}
+
+\begin{rSection}{Education}
+    \href{https://www.srmist.edu.in}{SRM Institute of Science and Technology} \hfill 2025 - 2030\\
+\textbf{M.Tech (Integrated)} Computer Science, Cybersecurity \& Digital Forensics
+
+Delhi Public School \hfill 2011 - 2024\\
+\textbf{Class XII} 
+\end{rSection}
+
+% \vspace{1.5em}
+
+
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{SKILLS}
+
+    \begin{tabular}{@{}>{\bfseries}l @{\hspace{4ex}}p{0.75\textwidth} @{}}
+    Languages & Python, Rust, TypeScript, JavaScript, Go, SQL\\
+Backend & FastAPI, SQLAlchemy, PostgreSQL, Hono, Express\\
+Frontend & Next.js, React, Svelte, Astro, TailwindCSS\\
+Infrastructure & Docker, GitHub Actions, Vercel, Supabase, Redis, Git
+    \end{tabular}
+    
+    \end{rSection}
+    
+%     \vspace{1.5em}
+
+    
+    
+\end{document}

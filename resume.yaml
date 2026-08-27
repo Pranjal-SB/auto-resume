@@ -1,0 +1,100 @@
+# Source of truth for everything the GitHub API can't supply.
+# Live from GitHub: star counts, language spread, repo URLs.
+# Everything here: edit by hand, it wins over LinkedIn.
+#
+# Text is escaped for LaTeX automatically — write plain prose, use & % $ # _
+# freely. Wrap a metric in "quotes" to render it bold.
+
+name: Pranjal Swarup Bhatnagar
+location: Chennai, Tamil Nadu, India
+email: psbhatnagar.in@gmail.com
+phone: "" # TODO: add or leave empty to omit the line
+
+links:
+  linkedin: linkedin.com/in/pranjalsb
+  github: github.com/Pranjal-SB
+  site: psbhatnagar.in
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE
+# ---------------------------------------------------------------------------
+experience:
+  - title: Associate
+    company: Next Tech Lab
+    location: Chennai, India
+    start: Apr 2026
+    end: Present
+    # TODO: what did you actually do here? 2-3 bullets.
+    # Renders as title + dates with no bullets until you fill this in.
+    bullets: []
+
+# ---------------------------------------------------------------------------
+# PROJECTS
+#   repo:  GitHub repo name — used to look up live stars. Blank = no repo.
+#   url:   what the resume links to. REQUIRED for private repos, since a
+#          github.com link to a private repo 404s for every reader.
+# ---------------------------------------------------------------------------
+projects:
+  - name: ExamDB
+    repo: examdb
+    url: https://examdb.org # private repo — must not link to GitHub
+    stack: Python, FastAPI, PostgreSQL, Next.js, Docker
+    show_stars: false
+    bullets:
+      - Built and shipped a searchable database of "194" Indian competitive exams, consolidating dates scattered across dozens of government portals into one source that cites the official page behind every date.
+      - Designed a scrape/normalise/dedup/reduce pipeline that preserves conflicting sources and flags the disagreement instead of silently picking a winner, so wrong data stays traceable to the scraper that produced it.
+      - Caught a scraper that passed its own tests while emitting "46" rows of a historical archive stamped with the current year, spotted from an impossible 29 FEB entry. Added source-diff validation so a row count is never mistaken for correctness.
+      - Built OAuth sign-in storing only SHA-256 digests of opaque session tokens, plus daily scrapers on GitHub Actions and a Next.js frontend. Solo project, live at examdb.org.
+
+  - name: TYPE
+    repo: type
+    url: https://github.com/Pranjal-SB/type
+    stack: Rust, ratatui, LSP, DAP, tree-sitter
+    show_stars: true
+    bullets:
+      - Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently "v0.2.10".
+      - Wrote LSP, DAP and tree-sitter clients so new language support arrives by protocol instead of per-language code. Holds a "100ms" cold-start and "16ms" p99 keystroke-to-glyph budget.
+      - Added an opt-in vim layer that maps modes and operators onto the same named actions the non-modal path already calls, so it owns no editing primitives and the core never depends on it.
+      - Made themes a TOML artifact rather than a compile-time constant, detecting terminal colour depth at startup and degrading the palette to 256 colours where required.
+
+  - name: OutN
+    repo: OutN
+    url: https://github.com/Pranjal-SB/OutN
+    stack: Python, discord.py, OpenCV
+    show_stars: true
+    bullets:
+      - Self-hostable FOSS Pokemon recognition and assistant bot for Discord, identifying spawns from images and solving hints automatically; config-driven so users deploy it without writing code.
+      - Maintained across "2+ years" to "v9.1" through repeated upstream API changes, drawing "7 stars" and "4 forks" from self-hosters.
+
+# ---------------------------------------------------------------------------
+# EDUCATION
+# ---------------------------------------------------------------------------
+education:
+  - school: SRM Institute of Science and Technology
+    degree: M.Tech (Integrated)
+    field: Computer Science, Cybersecurity & Digital Forensics
+    start: "2025"
+    end: "2030"
+    grade: "" # TODO: add CGPA, or leave empty to omit the label
+    url: https://www.srmist.edu.in
+
+  - school: Delhi Public School
+    degree: Class XII
+    field: ""
+    start: "2011"
+    end: "2024"
+    grade: ""
+    url: ""
+
+# ---------------------------------------------------------------------------
+# SKILLS — skills_order fixes row sequence (Go map iteration is randomised)
+# ---------------------------------------------------------------------------
+skills_order: [Languages, Backend, Frontend, Infrastructure]
+skills:
+  Languages: Python, Rust, TypeScript, JavaScript, Go, SQL
+  Backend: FastAPI, SQLAlchemy, PostgreSQL, Hono, Express
+  Frontend: Next.js, React, Svelte, Astro, TailwindCSS
+  Infrastructure: Docker, GitHub Actions, Vercel, Supabase, Redis, Git
+
+certifications: []
+languages: []
