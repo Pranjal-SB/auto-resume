@@ -171,4 +171,33 @@ func main() {
 	if err := Render(TemplateFile, OutputFile, cfg, gh); err != nil {
 		log.Fatalf("render: %v", err)
 	}
+
+	// Variant resumes: same content, projects filtered to a tag.
+	for outFile, v := range cfg.Variants {
+		sub := *cfg
+		sub.Projects = filterByTag(cfg.Projects, v.Tag)
+		sub.Contributions = filterByTag(cfg.Contributions, v.Tag)
+		if len(sub.Projects) == 0 {
+			fmt.Printf("warn: variant %q (tag %q) has no tagged projects, skipping\n", outFile, v.Tag)
+			continue
+		}
+		if err := Render(TemplateFile, outFile, &sub, gh); err != nil {
+			log.Fatalf("render %s: %v", outFile, err)
+		}
+	}
+}
+
+// filterByTag keeps the projects tagged with tag. Untagged projects belong to
+// the default resume only, so they are excluded from a focused variant.
+func filterByTag(items []Project, tag string) []Project {
+	var out []Project
+	for _, p := range items {
+		for _, t := range p.Tags {
+			if t == tag {
+				out = append(out, p)
+				break
+			}
+		}
+	}
+	return out
 }

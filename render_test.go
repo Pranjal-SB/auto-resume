@@ -256,6 +256,26 @@ func TestContactOmitsEmptyFields(t *testing.T) {
 	}
 }
 
+// A variant includes only tagged projects; untagged ones stay in the default
+// resume alone.
+func TestFilterByTag(t *testing.T) {
+	items := []Project{
+		{Name: "ExamDB"},
+		{Name: "TYPE", Tags: []string{"ai", "security"}},
+		{Name: "bullet", Tags: []string{"security"}},
+	}
+	sec := filterByTag(items, "security")
+	if len(sec) != 2 {
+		t.Fatalf("security variant should hold 2 projects, got %d", len(sec))
+	}
+	if filterByTag(items, "ai")[0].Name != "TYPE" {
+		t.Error("ai variant should include TYPE")
+	}
+	if len(filterByTag(items, "none")) != 0 {
+		t.Error("unknown tag should match nothing")
+	}
+}
+
 func TestMergeLinkedinNilIsSafe(t *testing.T) {
 	cfg := &Config{}
 	if added := MergeLinkedin(cfg, nil); added != nil {

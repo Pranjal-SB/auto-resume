@@ -100,25 +100,23 @@ certifications: []
 languages: []
 
 # ---------------------------------------------------------------------------
+# VARIANTS — extra tailored resumes. Uncomment, then tag projects with the
+# matching tag (e.g. tags: [ai] on a project) to include them. The default
+# resume.tex always renders with every project.
+# ---------------------------------------------------------------------------
+variants: {}
+  # ai-resume.tex:
+  #   tag: ai
+  # security-resume.tex:
+  #   tag: security
+
+# ---------------------------------------------------------------------------
 # OPEN SOURCE — merged PRs to other people's repos. show_stars: true here
 # because a big external star count is the whole point of the section.
 # ---------------------------------------------------------------------------
 contributions:
   - name: onthespot
-    repo: "" # not under your account, so stars come from the url'd repo below
     url: https://github.com/ots-downloader/onthespot
     stack: Python, "1.7k stars"
     bullets:
-      - Fixed Bandcamp search in a multi-service GUI music downloader by moving it onto the public search API, plus an AppImage runtime-resolution fix. Three PRs merged.
-
-  - name: ClassPro
-    url: https://github.com/suduolabs/ClassPro
-    stack: TypeScript, Next.js, Docker
-    bullets:
-      - Made the Docker build work from a clean clone and pinned the lockfile in this SRM academic-management app ("95 stars"); fixed date-derived planner logic and a shipped-DevMode leak in its Go scraper.
-
-  - name: is-a-dev/register
-    url: https://github.com/is-a-dev/register
-    stack: Community DNS registry, "11k stars"
-    bullets:
-      - Contributor to the is-a.dev subdomain registry, one of the larger community DNS projects on GitHub.
+      - Fixed broken Bandcamp search in a widely-used multi-service music downloader ("1.7k stars") by porting it onto the provider's public search API, plus an AppImage runtime-resolution fix. Three PRs merged upstream.

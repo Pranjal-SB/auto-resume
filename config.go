@@ -35,6 +35,15 @@ type Config struct {
 
 	Certifications []string `yaml:"certifications"`
 	Languages      []string `yaml:"languages"`
+
+	// Variants render extra tailored resume files. Key is the output filename
+	// (e.g. "ai-resume.tex"); a project appears in that variant when its tags
+	// include the variant's tag. The default resume.tex always has everything.
+	Variants map[string]Variant `yaml:"variants"`
+}
+
+type Variant struct {
+	Tag string `yaml:"tag"`
 }
 
 type Education struct {
@@ -69,6 +78,9 @@ type Project struct {
 	Bullets []string `yaml:"bullets"`
 	// ShowStars appends the live stargazer count when the repo has any.
 	ShowStars bool `yaml:"show_stars"`
+	// Tags select which variant resumes a project appears in. Empty = default
+	// resume only.
+	Tags []string `yaml:"tags"`
 }
 
 func LoadConfig(path string) (*Config, error) {
