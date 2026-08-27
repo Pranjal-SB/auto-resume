@@ -114,9 +114,11 @@ variants: {}
 # OPEN SOURCE — merged PRs to other people's repos. show_stars: true here
 # because a big external star count is the whole point of the section.
 # ---------------------------------------------------------------------------
-contributions:
-  - name: onthespot
-    url: https://github.com/ots-downloader/onthespot
-    stack: Python, "1.7k stars"
-    bullets:
-      - Fixed broken Bandcamp search in a widely-used multi-service music downloader ("1.7k stars") by porting it onto the provider's public search API, plus an AppImage runtime-resolution fix. Three PRs merged upstream.
+# OPEN SOURCE section is hidden while there's only one entry. Uncomment when
+# there are 2-3 to fill it out; the section renders itself when non-empty.
+contributions: []
+  # - name: onthespot
+  #   url: https://github.com/ots-downloader/onthespot
+  #   stack: Python, "1.7k stars"
+  #   bullets:
+  #     - Fixed broken Bandcamp search in a widely-used multi-service music downloader ("1.7k stars") by porting it onto the provider's public search API, plus an AppImage runtime-resolution fix. Three PRs merged upstream.
