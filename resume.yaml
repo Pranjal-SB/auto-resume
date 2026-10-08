@@ -52,19 +52,27 @@ projects:
     stack: Rust, ratatui, LSP, DAP, tree-sitter
     show_stars: false
     bullets:
-      - Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently "v0.2.10".
+      - Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently "v0.3.3".
       - Wrote LSP, DAP and tree-sitter clients so new language support arrives by protocol instead of per-language code. Holds a "100ms" cold-start and "16ms" p99 keystroke-to-glyph budget.
       - Added an opt-in vim layer that maps modes and operators onto the same named actions the non-modal path already calls, so it owns no editing primitives and the core never depends on it.
-      - Made themes a TOML artifact rather than a compile-time constant, detecting terminal colour depth at startup and degrading the palette to 256 colours where required.
+
+  - name: cowbird
+    repo: cowbird
+    url: https://github.com/Pranjal-SB/cowbird
+    stack: Python, asyncio, curl_cffi, FastAPI, Docker
+    show_stars: false
+    bullets:
+      - Library, CLI and HTTP server putting "32" disposable-email providers behind one async interface (generate an address, wait for mail, pull out the OTP or link), built for testing sign-up and verification flows.
+      - Routes on measured health instead of a hand-kept table. Every call feeds per-provider latency and failure stats, and a weekly CI canary quarantines any backend whose response schema drifts and opens an issue with the diff.
+      - Every adapter runs one shared contract suite, offline against recorded fixtures and live against the real service. "1,169" offline tests, plus a live test that sends real mail to each provider and reads it back.
 
   - name: OutN
     repo: OutN
     url: https://github.com/Pranjal-SB/OutN
-    stack: Python, discord.py, OpenCV
+    stack: Python, discord.py, TensorFlow
     show_stars: false
     bullets:
-      - Self-hostable FOSS Pokemon recognition and assistant bot for Discord, identifying spawns from images and solving hints automatically; config-driven so users deploy it without writing code.
-      - Maintained across "2+ years" and "9 major versions" through repeated breaking changes to the upstream Discord and Poketwo APIs, keeping existing self-hosted deployments working without manual migration.
+      - Self-hostable FOSS Pokemon recognition bot for Discord, maintained across "2+ years" and "9 major versions" of breaking upstream API changes without manual migration for existing deployments. Also ships as a desktop app.
 
 # ---------------------------------------------------------------------------
 # EDUCATION
