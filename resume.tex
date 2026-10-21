@@ -25,12 +25,15 @@
 
 \begin{rSection}{EXPERIENCE}
     \textbf{Associate, Norman Lab} \hfill Apr 2026 - Present\\
-Next Tech Lab (QS Reimagine Education Award winner) \hfill \textit{SRMIST, Kattankulathur}
+\href{https://nexttechlab.in}{Next Tech Lab (QS Reimagine Education Award winner)} \hfill \textit{SRMIST, Kattankulathur}
 \begin{itemize}
 \itemsep -3pt{}
 \item Selected by interview into Norman Lab at Next Tech Lab, the first student-led organisation from India to win the QS Reimagine Education Award.
 \item Built StupidHacks, the portal for the lab's internal hackathon, with a small team. Owned the data layer and its rule tests, the design system on the lab's brand, and the move to Supabase with one-time-code roster sign-in. Live at stupidhack.nexttechlab.in.
 \end{itemize}
+
+\textbf{Member, campus tech communities} \hfill Oct 2026 - Present\\
+\href{https://htbchennai.in}{HackTheBox Chennai (Cybersecurity \& Dev)}, \href{https://www.gdgsrm.com}{GDG on Campus SRM (Technical)}, \href{https://aaruush.org}{Aaruush (Team Envision)} \hfill \textit{Chennai}
 \end{rSection}
 
 % \vspace{1.5em}
@@ -49,12 +52,13 @@ Next Tech Lab (QS Reimagine Education Award winner) \hfill \textit{SRMIST, Katta
 \item Built OAuth sign-in storing only SHA-256 digests of opaque session tokens, plus daily scrapers on GitHub Actions and a Next.js frontend. Solo project, live at examdb.org.
 \end{itemize}
 
-\textbf{\href{https://github.com/Pranjal-SB/type}{TYPE}} \(\mid\) \textbf{Rust, ratatui, LSP, DAP, tree-sitter}
+\textbf{\href{https://github.com/Pranjal-SB/type}{TYPE}} \(\mid\) \textbf{Rust, ratatui, LSP, tree-sitter}
 \begin{itemize}
 \itemsep -3pt{}
-\item Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently \textbf{v0.3.3}.
-\item Wrote LSP, DAP and tree-sitter clients so new language support arrives by protocol instead of per-language code. Holds a \textbf{100ms} cold-start and \textbf{16ms} p99 keystroke-to-glyph budget.
-\item Added an opt-in vim layer that maps modes and operators onto the same named actions the non-modal path already calls, so it owns no editing primitives and the core never depends on it.
+\item Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor (\textbf{v0.4}), with static musl builds and installers that verify checksums.
+\item Wrote LSP and tree-sitter clients so language support arrives by protocol instead of per-language code. Diagnostics, go-to-definition, completion and signature help, with grammars compiled into the binary and parsed off the render thread.
+\item Holds a \textbf{100ms} cold-start and \textbf{16ms} p99 keystroke-to-glyph budget, enforced by perf tests in CI. The parallel project walk indexes \textbf{37,586} files in \textbf{95ms} against 2.6s serial.
+\item Every action is reachable by key, palette and mouse, and a test fails the build when one lacks a path. An opt-in vim layer maps modes onto the same named actions, so the core never depends on it.
 \end{itemize}
 
 \textbf{\href{https://github.com/Pranjal-SB/cowbird}{cowbird}} \(\mid\) \textbf{Python, asyncio, curl\_cffi, FastAPI, Docker}

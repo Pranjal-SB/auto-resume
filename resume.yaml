@@ -21,12 +21,27 @@ links:
 experience:
   - title: Associate, Norman Lab
     company: Next Tech Lab (QS Reimagine Education Award winner)
+    url: https://nexttechlab.in
     location: SRMIST, Kattankulathur
     start: Apr 2026
     end: Present
     bullets:
       - Selected by interview into Norman Lab at Next Tech Lab, the first student-led organisation from India to win the QS Reimagine Education Award.
       - Built StupidHacks, the portal for the lab's internal hackathon, with a small team. Owned the data layer and its rule tests, the design system on the lab's brand, and the move to Supabase with one-time-code roster sign-in. Live at stupidhack.nexttechlab.in.
+
+  # Three memberships folded into one entry; as separate entries they push the PDF to 2 pages.
+  - title: Member, campus tech communities
+    orgs:
+      - name: HackTheBox Chennai (Cybersecurity & Dev)
+        url: https://htbchennai.in
+      - name: GDG on Campus SRM (Technical)
+        url: https://www.gdgsrm.com
+      - name: Aaruush (Team Envision)
+        url: https://aaruush.org
+    location: Chennai
+    start: Oct 2026
+    end: Present
+    bullets: []
 
 # ---------------------------------------------------------------------------
 # PROJECTS
@@ -49,12 +64,13 @@ projects:
   - name: TYPE
     repo: type
     url: https://github.com/Pranjal-SB/type
-    stack: Rust, ratatui, LSP, DAP, tree-sitter
+    stack: Rust, ratatui, LSP, tree-sitter
     show_stars: false
     bullets:
-      - Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor, currently "v0.3.3".
-      - Wrote LSP, DAP and tree-sitter clients so new language support arrives by protocol instead of per-language code. Holds a "100ms" cold-start and "16ms" p99 keystroke-to-glyph budget.
-      - Added an opt-in vim layer that maps modes and operators onto the same named actions the non-modal path already calls, so it owns no editing primitives and the core never depends on it.
+      - Building a full IDE that runs in the terminal, non-modal with full mouse parity, aimed at the gap between bare terminal editors and heavyweight GUI ones. Published on crates.io as typ-editor ("v0.4"), with static musl builds and installers that verify checksums.
+      - Wrote LSP and tree-sitter clients so language support arrives by protocol instead of per-language code. Diagnostics, go-to-definition, completion and signature help, with grammars compiled into the binary and parsed off the render thread.
+      - Holds a "100ms" cold-start and "16ms" p99 keystroke-to-glyph budget, enforced by perf tests in CI. The parallel project walk indexes "37,586" files in "95ms" against 2.6s serial.
+      - Every action is reachable by key, palette and mouse, and a test fails the build when one lacks a path. An opt-in vim layer maps modes onto the same named actions, so the core never depends on it.
 
   - name: cowbird
     repo: cowbird
