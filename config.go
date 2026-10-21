@@ -57,12 +57,21 @@ type Education struct {
 }
 
 type Job struct {
-	Title    string   `yaml:"title"`
-	Company  string   `yaml:"company"`
+	Title   string `yaml:"title"`
+	Company string `yaml:"company"`
+	URL     string `yaml:"url"`
+	// Orgs replaces Company when one entry covers several groups, so each
+	// can carry its own link.
+	Orgs     []Org    `yaml:"orgs"`
 	Location string   `yaml:"location"`
 	Start    string   `yaml:"start"`
 	End      string   `yaml:"end"`
 	Bullets  []string `yaml:"bullets"`
+}
+
+type Org struct {
+	Name string `yaml:"name"`
+	URL  string `yaml:"url"`
 }
 
 type Project struct {

@@ -158,12 +158,28 @@ func renderProjects(items []Project, idx map[string]repoStats) string {
 	return strings.Join(entries, "\n\n")
 }
 
+func renderOrgs(j Job) string {
+	orgs := j.Orgs
+	if len(orgs) == 0 {
+		orgs = []Org{{Name: j.Company, URL: j.URL}}
+	}
+	parts := make([]string, 0, len(orgs))
+	for _, o := range orgs {
+		name := cleanData(o.Name)
+		if o.URL != "" {
+			name = fmt.Sprintf(`\href{%s}{%s}`, o.URL, name)
+		}
+		parts = append(parts, name)
+	}
+	return strings.Join(parts, ", ")
+}
+
 func renderExperience(cfg *Config) string {
 	var entries []string
 	for _, j := range cfg.Experience {
 		entry := []string{
 			fmt.Sprintf(`\textbf{%s} \hfill %s - %s\\`, cleanData(j.Title), cleanData(j.Start), cleanData(j.End)),
-			fmt.Sprintf(`%s \hfill \textit{%s}`, cleanData(j.Company), cleanData(j.Location)),
+			fmt.Sprintf(`%s \hfill \textit{%s}`, renderOrgs(j), cleanData(j.Location)),
 		}
 		entry = append(entry, itemize(j.Bullets)...)
 		entries = append(entries, strings.Join(entry, "\n"))

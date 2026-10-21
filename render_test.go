@@ -138,6 +138,23 @@ func TestEmptyGradeOmitsLabel(t *testing.T) {
 	}
 }
 
+func TestExperienceLinksCompanyAndOrgs(t *testing.T) {
+	got := renderExperience(&Config{Experience: []Job{
+		{Title: "A", Company: "Lab", URL: "https://lab.example"},
+		{Title: "B", Orgs: []Org{{Name: "One", URL: "https://one.example"}, {Name: "Two"}}},
+		{Title: "C", Company: "Plain"},
+	}})
+	for _, want := range []string{
+		`\href{https://lab.example}{Lab}`,
+		`\href{https://one.example}{One}, Two`,
+		"\nPlain ",
+	} {
+		if !strings.Contains(got, want) {
+			t.Errorf("missing %q in %q", want, got)
+		}
+	}
+}
+
 func TestSkillsOrderIsStable(t *testing.T) {
 	cfg := &Config{
 		Skills:      map[string]string{"Languages": "Go", "Backend": "FastAPI", "Frontend": "React"},
