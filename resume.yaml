@@ -29,13 +29,19 @@ experience:
       - Selected by interview into Norman Lab at Next Tech Lab, the first student-led organisation from India to win the QS Reimagine Education Award.
       - Built StupidHacks, the portal for the lab's internal hackathon, with a small team. Owned the data layer and its rule tests, the design system on the lab's brand, and the move to Supabase with one-time-code roster sign-in. Live at stupidhack.nexttechlab.in.
 
-  # Three memberships folded into one entry; as separate entries they push the PDF to 2 pages.
+  - title: Member, Technical Team
+    company: GDG on Campus SRM
+    url: https://www.gdgsrm.com
+    location: SRMIST, Kattankulathur
+    start: Oct 2026
+    end: Present
+    bullets: []
+
+  # Two memberships folded into one entry; separate entries risk pushing the PDF to 2 pages.
   - title: Member, campus tech communities
     orgs:
       - name: HackTheBox Chennai (Cybersecurity & Dev)
         url: https://htbchennai.in
-      - name: GDG on Campus SRM (Technical)
-        url: https://www.gdgsrm.com
       - name: Aaruush (Team Envision)
         url: https://aaruush.org
     location: Chennai
